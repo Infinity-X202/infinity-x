@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Infinity X Admin Panel</title>
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; font-family: Segoe UI, system-ui, sans-serif;
+        color: #e0f2fe;
+        background: radial-gradient(900px 400px at 10% -10%, rgba(56,189,248,.25), transparent 50%), #020617;
+      }
+      header { display: flex; align-items: center; gap: 12px; padding: 20px 24px; }
+      .mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; font-weight: 700;
+        background: linear-gradient(135deg, #22d3ee, #4f46e5); box-shadow: 0 0 24px rgba(56,189,248,.45); }
+      h1 { margin: 0; font-size: 22px; }
+      p { margin: 4px 0 0; color: #7dd3fc; font-size: 13px; }
+      main { display: grid; gap: 16px; padding: 0 24px 24px; max-width: 880px; }
+      .card { border: 1px solid rgba(56,189,248,.25); background: rgba(0,0,0,.35); border-radius: 20px; padding: 18px; }
+      button { border: 0; border-radius: 999px; padding: 12px 18px; font-weight: 600; cursor: pointer; color: white;
+        background: linear-gradient(90deg, #06b6d4, #4f46e5); }
+      button.stop { background: #3f3f46; }
+      button:disabled { opacity: .5; cursor: wait; }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .link { margin-top: 12px; word-break: break-all; font-size: 18px; }
+      a { color: #67e8f9; }
+      pre { white-space: pre-wrap; max-height: 180px; overflow: auto; color: #bae6fd; font-size: 12px; }
+      .pill { border-radius: 999px; padding: 4px 10px; background: #0f172a; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="mark">∞</div>
+      <div>
+        <h1>Infinity X Admin Panel</h1>
+        <p>Desktop control. Start the server, get the public link, then manage people and live camera.</p>
+      </div>
+    </header>
+    <main>
+      <section class="card">
+        <div class="row">
+          <button id="start">Start server</button>
+          <button id="stop" class="stop">Stop</button>
+          <span class="pill" id="state">stopped</span>
+        </div>
+        <div class="link" id="url">Public link will appear here.</div>
+        <div class="row" style="margin-top:12px">
+          <button id="openChat" class="stop">Open chat site</button>
+          <button id="openDesk" class="stop">Open admin desk</button>
+        </div>
+      </section>
+      <section class="card">
+        <strong>What this panel gives you</strong>
+        <ul>
+          <li>A public Cloudflare link anyone can open</li>
+          <li>Separate admin desk: names, secret codes, add and delete people</li>
+          <li>Live camera (front / back) when the streamer code is online</li>
+        </ul>
+        <p>After start, sign in on the admin desk with code <b>xadmin</b>.</p>
+      </section>
+      <section class="card"><pre id="log">Waiting…</pre></section>
+    </main>
+    <script>
+      const state = document.getElementById("state");
+      const url = document.getElementById("url");
+      const log = document.getElementById("log");
+      async function refresh() {
+        const r = await fetch("/api/status").then((x) => x.json());
+        state.textContent = r.running ? "running" : "stopped";
+        url.innerHTML = r.publicUrl ? `<a href="${r.publicUrl}" target="_blank">${r.publicUrl}</a>` : "Public link will appear here.";
+        log.textContent = r.log || "Waiting…";
+      }
+      document.getElementById("start").onclick = async () => {
+        state.textContent = "starting…";
+        await fetch("/api/start", { method: "POST" });
+        refresh();
+      };
+      document.getElementById("stop").onclick = async () => {
+        await fetch("/api/stop", { method: "POST" });
+        refresh();
+      };
+      document.getElementById("openChat").onclick = () => fetch("/api/open?target=chat", { method: "POST" });
+      document.getElementById("openDesk").onclick = () => fetch("/api/open?target=desk", { method: "POST" });
+      setInterval(refresh, 2000);
+      refresh();
+    </script>
+  </body>
+</html>
