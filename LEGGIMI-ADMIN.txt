@@ -1,0 +1,10 @@
+Infinity X — Admin Panel
+
+1. Estrai questo zip.
+2. Doppio clic su "Start Admin Panel.bat".
+3. Nell'app premi "Avvia il server".
+4. Copia il link pubblico e mandalo a chi deve chattare.
+
+Quel link è solo la chat.
+Questa app è l'admin panel: nomi, codici e live restano qui.
+Non mandare questo zip alle persone. Manda solo il link della chat.

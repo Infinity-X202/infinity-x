@@ -8,82 +8,235 @@
       :root { color-scheme: dark; }
       * { box-sizing: border-box; }
       body {
-        margin: 0; min-height: 100vh; font-family: Segoe UI, system-ui, sans-serif;
-        color: #e0f2fe;
-        background: radial-gradient(900px 400px at 10% -10%, rgba(56,189,248,.25), transparent 50%), #020617;
+        margin: 0; min-height: 100vh; color: #e6f6ff;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background:
+          radial-gradient(900px 420px at 12% -10%, rgba(34,211,238,.18), transparent 55%),
+          radial-gradient(700px 380px at 100% 0%, rgba(59,130,246,.16), transparent 50%),
+          #03101c;
       }
-      header { display: flex; align-items: center; gap: 12px; padding: 20px 24px; }
-      .mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; font-weight: 700;
-        background: linear-gradient(135deg, #22d3ee, #4f46e5); box-shadow: 0 0 24px rgba(56,189,248,.45); }
-      h1 { margin: 0; font-size: 22px; }
-      p { margin: 4px 0 0; color: #7dd3fc; font-size: 13px; }
-      main { display: grid; gap: 16px; padding: 0 24px 24px; max-width: 880px; }
-      .card { border: 1px solid rgba(56,189,248,.25); background: rgba(0,0,0,.35); border-radius: 20px; padding: 18px; }
-      button { border: 0; border-radius: 999px; padding: 12px 18px; font-weight: 600; cursor: pointer; color: white;
-        background: linear-gradient(90deg, #06b6d4, #4f46e5); }
-      button.stop { background: #3f3f46; }
-      button:disabled { opacity: .5; cursor: wait; }
-      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-      .link { margin-top: 12px; word-break: break-all; font-size: 18px; }
-      a { color: #67e8f9; }
-      pre { white-space: pre-wrap; max-height: 180px; overflow: auto; color: #bae6fd; font-size: 12px; }
-      .pill { border-radius: 999px; padding: 4px 10px; background: #0f172a; font-size: 12px; }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 22px; }
+      header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+      .logo { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 28px; font-weight: 700;
+        background: linear-gradient(135deg, #38bdf8, #6366f1); box-shadow: 0 0 28px rgba(56,189,248,.45); }
+      h1 { margin: 0; font-size: 28px; letter-spacing: -.02em; }
+      .run { margin-left: auto; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(16,185,129,.35);
+        background: rgba(6,78,59,.35); color: #6ee7b7; border-radius: 999px; padding: 8px 14px; font-size: 13px; }
+      .dot { width: 8px; height: 8px; border-radius: 99px; background: #34d399; box-shadow: 0 0 10px #34d399; }
+      .dot.off { background: #64748b; box-shadow: none; }
+      .card { border: 1px solid rgba(56,189,248,.18); background: rgba(4,18,32,.72); border-radius: 22px; padding: 18px; margin-bottom: 16px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+      .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+      .tab { border: 0; border-radius: 999px; padding: 10px 16px; color: #bae6fd; background: transparent; cursor: pointer; }
+      .tab.on { background: linear-gradient(90deg, #0891b2, #0e7490); color: white; }
+      h2 { margin: 0 0 4px; font-size: 26px; }
+      .sub { margin: 0 0 14px; color: #7dd3fc; font-size: 14px; }
+      .add { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+      label { display: block; font-size: 13px; color: #bae6fd; margin: 10px 0 6px; }
+      input[type="text"], input[type="password"] {
+        width: 100%; border-radius: 12px; border: 1px solid rgba(56,189,248,.25); background: #071422; color: white;
+        padding: 12px 14px; outline: none;
+      }
+      .check { display: flex; align-items: center; gap: 8px; margin-top: 10px; color: #dbeafe; font-size: 14px; }
+      button.primary, button.ghost, button.save, button.small {
+        border: 0; border-radius: 12px; cursor: pointer; color: white; font-weight: 650;
+      }
+      button.primary { margin-top: 14px; padding: 12px 18px; background: linear-gradient(90deg, #06b6d4, #0891b2); }
+      button.ghost { background: #122033; border: 1px solid rgba(148,163,184,.25); }
+      button.save { background: #0e7490; padding: 10px 14px; }
+      button.small { background: #102033; border: 1px solid rgba(56,189,248,.2); padding: 10px 12px; }
+      button.warn { background: transparent; color: #fb7185; border: 0; cursor: pointer; font-size: 18px; }
+      .shield { min-height: 220px; border-radius: 18px; display: grid; place-items: center;
+        background: radial-gradient(circle at 50% 45%, rgba(34,211,238,.16), transparent 55%), #06111d; }
+      .person { display: grid; grid-template-columns: 180px 1fr 1fr auto; gap: 12px; align-items: end; padding: 14px 0; border-top: 1px solid rgba(56,189,248,.12); }
+      .who { display: flex; align-items: center; gap: 10px; padding-bottom: 8px; }
+      .avatar { width: 36px; height: 36px; border-radius: 99px; display: grid; place-items: center; background: #0e7490; }
+      .badge { font-size: 11px; color: #5eead4; border: 1px solid rgba(45,212,191,.4); border-radius: 999px; padding: 2px 8px; }
+      .actions { display: flex; gap: 8px; align-items: center; padding-bottom: 2px; }
+      .server-grid { display: grid; grid-template-columns: 280px 1fr; gap: 18px; align-items: start; }
+      .start { width: 100%; padding: 16px 18px; border: 0; border-radius: 16px; color: white; font-size: 18px; font-weight: 700; cursor: pointer;
+        background: linear-gradient(90deg, #38bdf8, #2563eb); box-shadow: 0 10px 30px rgba(37,99,235,.35); }
+      .stop { width: 100%; margin-top: 10px; padding: 14px; border-radius: 16px; }
+      .k { font-size: 11px; letter-spacing: .16em; color: #67e8f9; margin: 0 0 8px; }
+      .urlbox { display: flex; align-items: center; gap: 8px; border: 1px solid rgba(56,189,248,.28); border-radius: 12px; padding: 12px 14px; background: #06111c; }
+      .urlbox a { color: #67e8f9; word-break: break-all; text-decoration: none; }
+      .openrow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+      .openrow button { padding: 14px; border-radius: 14px; }
+      .hidden { display: none; }
+      #msg { min-height: 18px; color: #fca5a5; font-size: 13px; }
+      @media (max-width: 900px) {
+        .add, .person, .server-grid, .openrow { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
-    <header>
-      <div class="mark">∞</div>
-      <div>
+    <div class="wrap">
+      <header>
+        <div class="logo">∞</div>
         <h1>Infinity X Admin Panel</h1>
-        <p>Desktop control. Start the server, get the public link, then manage people and live camera.</p>
-      </div>
-    </header>
-    <main>
-      <section class="card">
-        <div class="row">
-          <button id="start">Start server</button>
-          <button id="stop" class="stop">Stop</button>
-          <span class="pill" id="state">stopped</span>
+        <div class="run"><span id="dot" class="dot off"></span><span id="state">stopped</span></div>
+      </header>
+
+      <section class="card" id="people">
+        <div class="tabs">
+          <button class="tab on" id="tabPeople">People and secret codes</button>
+          <button class="tab" id="tabLive">Live camera</button>
+          <button class="tab" id="tabSecure">Secure session</button>
         </div>
-        <div class="link" id="url">Public link will appear here.</div>
-        <div class="row" style="margin-top:12px">
-          <button id="openChat" class="stop">Open chat site</button>
-          <button id="openDesk" class="stop">Open admin desk</button>
+        <div id="viewPeople">
+          <h2>People and secret codes</h2>
+          <p class="sub">Manage authorized users and their secret access codes. The public site is only the chat.</p>
+          <div class="add">
+            <div>
+              <strong>Add person</strong>
+              <label>Display name</label>
+              <input id="newName" type="text" placeholder="Enter display name" />
+              <label>Secret code</label>
+              <input id="newCode" type="text" placeholder="Enter secret code" />
+              <label class="check"><input id="newLive" type="checkbox" checked /> Can open admin live view</label>
+              <label class="check"><input id="newCam" type="checkbox" /> Sends camera</label>
+              <button class="primary" id="addBtn">+ Add</button>
+              <p id="msg"></p>
+            </div>
+            <div class="shield" aria-hidden="true">
+              <svg width="160" height="180" viewBox="0 0 160 180" fill="none">
+                <path d="M80 8 L146 32 V86 C146 128 118 158 80 172 C42 158 14 128 14 86 V32 Z" stroke="#22d3ee" stroke-width="3" fill="rgba(34,211,238,.05)"/>
+                <rect x="68" y="78" width="24" height="28" rx="4" stroke="#67e8f9" stroke-width="3"/>
+                <path d="M74 78 V68 a6 6 0 0 1 12 0 V78" stroke="#67e8f9" stroke-width="3"/>
+              </svg>
+            </div>
+          </div>
+          <div id="list"></div>
+        </div>
+        <div id="viewLive" class="hidden">
+          <h2>Live camera</h2>
+          <p class="sub">Front and back camera from the person marked “Sends camera”. Start the server first, then open the chat link on their phone with the camera code.</p>
+          <p id="liveHint"></p>
+        </div>
+        <div id="viewSecure" class="hidden">
+          <h2>Secure session</h2>
+          <p class="sub">This window is the admin app. Other people only get the chat website from the public link.</p>
         </div>
       </section>
+
       <section class="card">
-        <strong>What this panel gives you</strong>
-        <ul>
-          <li>A public Cloudflare link anyone can open</li>
-          <li>Separate admin desk: names, secret codes, add and delete people</li>
-          <li>Live camera (front / back) when the streamer code is online</li>
-        </ul>
-        <p>After start, sign in on the admin desk with code <b>xadmin</b>.</p>
+        <div class="server-grid">
+          <div>
+            <button class="start" id="start">⏻ Start server</button>
+            <button class="ghost stop" id="stop">Stop server</button>
+          </div>
+          <div>
+            <p class="k">STATUS</p>
+            <div class="run" style="margin:0 0 14px; width:max-content"><span id="dot2" class="dot off"></span><span id="state2">stopped</span></div>
+            <p class="k">PUBLIC URL</p>
+            <div class="urlbox">🔗 <a id="url" href="#" target="_blank">Press Start server. This app will show the public chat link.</a></div>
+            <div class="openrow">
+              <button class="primary" id="openChat">↗ Open chat site</button>
+              <button class="ghost" id="focusPeople">🛡 People & codes</button>
+            </div>
+          </div>
+        </div>
       </section>
-      <section class="card"><pre id="log">Waiting…</pre></section>
-    </main>
+    </div>
     <script>
       const state = document.getElementById("state");
-      const url = document.getElementById("url");
-      const log = document.getElementById("log");
+      const state2 = document.getElementById("state2");
+      const dot = document.getElementById("dot");
+      const dot2 = document.getElementById("dot2");
+      const urlEl = document.getElementById("url");
+      const msg = document.getElementById("msg");
+      let lastUrl = "";
+
+      function setTab(name) {
+        document.getElementById("viewPeople").classList.toggle("hidden", name !== "people");
+        document.getElementById("viewLive").classList.toggle("hidden", name !== "live");
+        document.getElementById("viewSecure").classList.toggle("hidden", name !== "secure");
+        document.getElementById("tabPeople").classList.toggle("on", name === "people");
+        document.getElementById("tabLive").classList.toggle("on", name === "live");
+        document.getElementById("tabSecure").classList.toggle("on", name === "secure");
+        if (name === "live") document.getElementById("liveHint").textContent = lastUrl ? "Chat link: " + lastUrl : "Start the server to get the chat link.";
+      }
+      document.getElementById("tabPeople").onclick = () => setTab("people");
+      document.getElementById("tabLive").onclick = () => setTab("live");
+      document.getElementById("tabSecure").onclick = () => setTab("secure");
+      document.getElementById("focusPeople").onclick = () => { setTab("people"); document.getElementById("people").scrollIntoView({ behavior: "smooth" }); };
+
       async function refresh() {
         const r = await fetch("/api/status").then((x) => x.json());
-        state.textContent = r.running ? "running" : "stopped";
-        url.innerHTML = r.publicUrl ? `<a href="${r.publicUrl}" target="_blank">${r.publicUrl}</a>` : "Public link will appear here.";
-        log.textContent = r.log || "Waiting…";
+        const on = Boolean(r.running);
+        state.textContent = state2.textContent = on ? "running" : "stopped";
+        dot.classList.toggle("off", !on);
+        dot2.classList.toggle("off", !on);
+        lastUrl = r.publicUrl || "";
+        urlEl.textContent = lastUrl || "Press Start server. This app will show the public chat link.";
+        urlEl.href = lastUrl || "#";
+        if (on) loadPeople();
       }
+
+      function row(p) {
+        const el = document.createElement("div");
+        el.className = "person";
+        el.innerHTML = `
+          <div class="who"><div class="avatar">◉</div><div><b>${p.displayName}</b><div><span class="badge">ACTIVE</span></div></div></div>
+          <div><label>Display name</label><input data-k="name" type="text" value="${p.displayName.replaceAll('"', "&quot;")}" /></div>
+          <div><label>Secret code</label><input data-k="code" type="password" value="${p.code.replaceAll('"', "&quot;")}" /></div>
+          <div class="actions">
+            <button class="save" data-act="save">Save</button>
+            <button class="small" data-act="live">${p.canViewLive ? "Disable live" : "Enable live"}</button>
+            <button class="small" data-act="cam">${p.isStreamer ? "Camera on" : "Set camera"}</button>
+            ${p.locked ? "" : '<button class="warn" data-act="del">🗑</button>'}
+          </div>`;
+        el.querySelector('[data-act="save"]').onclick = async () => {
+          await fetch("/api/people/" + encodeURIComponent(p.username), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ displayName: el.querySelector('[data-k="name"]').value, code: el.querySelector('[data-k="code"]').value }) });
+          loadPeople();
+        };
+        el.querySelector('[data-act="live"]').onclick = async () => {
+          await fetch("/api/people/" + encodeURIComponent(p.username), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ canViewLive: !p.canViewLive }) });
+          loadPeople();
+        };
+        el.querySelector('[data-act="cam"]').onclick = async () => {
+          await fetch("/api/people/" + encodeURIComponent(p.username), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ isStreamer: !p.isStreamer }) });
+          loadPeople();
+        };
+        const del = el.querySelector('[data-act="del"]');
+        if (del) del.onclick = async () => {
+          if (!confirm("Delete " + p.displayName + "?")) return;
+          await fetch("/api/people/" + encodeURIComponent(p.username), { method: "DELETE" });
+          loadPeople();
+        };
+        return el;
+      }
+
+      async function loadPeople() {
+        const res = await fetch("/api/people");
+        if (!res.ok) return;
+        const data = await res.json();
+        const list = document.getElementById("list");
+        list.innerHTML = "";
+        (data.identities || []).forEach((p) => list.appendChild(row(p)));
+      }
+
       document.getElementById("start").onclick = async () => {
         state.textContent = "starting…";
         await fetch("/api/start", { method: "POST" });
         refresh();
       };
-      document.getElementById("stop").onclick = async () => {
-        await fetch("/api/stop", { method: "POST" });
-        refresh();
+      document.getElementById("stop").onclick = async () => { await fetch("/api/stop", { method: "POST" }); refresh(); };
+      document.getElementById("openChat").onclick = () => fetch("/api/open-chat", { method: "POST" });
+      document.getElementById("addBtn").onclick = async () => {
+        msg.textContent = "";
+        const res = await fetch("/api/people", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
+          displayName: document.getElementById("newName").value,
+          code: document.getElementById("newCode").value,
+          canViewLive: document.getElementById("newLive").checked,
+          isStreamer: document.getElementById("newCam").checked
+        }) });
+        if (!res.ok) { const t = await res.json().catch(() => ({})); msg.textContent = t.error || "Could not add. Start the server first."; return; }
+        document.getElementById("newName").value = "";
+        document.getElementById("newCode").value = "";
+        loadPeople();
       };
-      document.getElementById("openChat").onclick = () => fetch("/api/open?target=chat", { method: "POST" });
-      document.getElementById("openDesk").onclick = () => fetch("/api/open?target=desk", { method: "POST" });
-      setInterval(refresh, 2000);
+      setInterval(refresh, 2500);
       refresh();
     </script>
   </body>
